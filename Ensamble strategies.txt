@@ -1,0 +1,15 @@
+Option 1
+
+the model does not weight a guess of class by the cost of a failed prediction
+
+build a new data frame from a matrix created from each of the rbinds of all the predicted vales from each of the models 
+
+apply strength to each predictor by multiplying classifier accuracy
+
+the matrix will have a label defined by a function that wieghts row values based on their strength of hand.
+
+use this data frame to build to build a new model separated into training and validation
+
+Option 2
+
+take the sensisitivity and specificy of each true value in the matrix, transform them by the by multiplying the accuracy by the 1/T values in each element of the prediction and normalize it, then choose the largest value. 
