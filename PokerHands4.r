@@ -813,17 +813,23 @@ analysis[[10]] <-list(Model = eval.model,
 #Build final model from Predicted vectors
 
 #assemble data frame of predictions from classes
-predictedDF <- data.frame(analysis[[1]][["Predictions"]][2][[1]],
-                          analysis[[2]][["Predictions"]][2][[1]],
-                          analysis[[3]][["Predictions"]][2][[1]],
-                          analysis[[4]][["Predictions"]][2][[1]],
-                          analysis[[5]][["Predictions"]][2][[1]],
-                          analysis[[6]][["Predictions"]][2][[1]],
-                          analysis[[7]][["Predictions"]][2][[1]],
-                          analysis[[8]][["Predictions"]][2][[1]],
-                          analysis[[9]][["Predictions"]][2][[1]],
-                          analysis[[10]][["Predictions"]][2][[1]]
+predictedDF <- data.frame(as.numeric(as.logical((analysis[[1]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[2]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[3]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[4]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[5]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[6]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[7]][["Predictions"]][2][[1]]))),
+                          as.numeric(as.logical((analysis[[8]][["Predictions"]][2][[1]]))),                                                                                          
+                          as.numeric(as.logical((analysis[[9]][["Predictions"]][2][[1]]))),                                               
+                          as.numeric(as.logical((analysis[[10]][["Predictions"]][2][[1]])))
 )
+
+#build a vector of balance accuracy values for each class model
+accuracyVec <- c(0.6627,0.5373,0.505767,0.564243,0.580599,0.620161,0.527801,0.509736,0.499897,5.0e-01)
+
+#create a table of balanced accuracy weighted predictions
+predictedDF <- predictedDF*accuracyVec
 
 #give the data frame a the class variable from testing
 predictedDF <- cbind(predictedDF,test$Hand)
